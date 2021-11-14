@@ -1,0 +1,628 @@
+## 기능 - 역할 분담
+
+---
+
+1. 온도 조절 : 온도 (DHT11) + 스팟 램프 + Fan_라즈베리파이 쿨링 팬으로 확인 후 구매예정 (DHT11)
+    - 스팟 램프 사용 → 스팟 램프의 내구성 문제로 확인 후 백열전구로 교체 → 추후 시연 시 다시 스팟 램프사용
+    - 케이스 안에 DHT 11 2개 사용 - 두 온도의 평균값 사용
+    - 참고 자료
+        
+        [[아두이노] 릴레이 모듈로 220V 전등 제어 with 블루투스 통신, 버튼](https://www.youtube.com/watch?v=m07HngxlSyw)
+        
+    
+2. 습도 조절 : 습도 센서(DHT11) + 가습기 센서 (습도 / 온도) + 환기 용도 팬
+    - 습도 60 ~ 70% 유지를 위해 지속적인 물 공급 필요
+    - <가습기 운용안>
+        
+        1) 먼저 물 충만 시간(t1) , 가습기 켜놓은 시간의 합(t2) 
+        
+              t1=t2가 되면  휴대폰 앱에 알림
+        
+        2) 삼다수 2L와 아예 연결
+        
+    - 삼다수 2L와 아예 연결
+    
+3. 케이지 모니터링 기술 : 카메라 센서 + 스트리밍
+    - 라즈베리파이 cctv , 원격 관리 자료 참고
+    - 메인 컴퓨터 + 라즈베리파이 ⇒ TCP/IP 통신 필요
+    
+    [[개인프로젝트] 라즈베리파이를 이용한 스마트홈 및 원격관리 어플리케이션](https://1d1cblog.tistory.com/45)
+    
+4. 원격 모니터링 : 애플리케이션(앱, 서버 연결)
+    - 아마존 웹 서비스
+    - 구글 클라우드 플랫폼 (결정)
+    - 네이버 클라우드 플랫폼
+    - 개인 컴퓨터 / 노트북 사용 서버 구축
+    - 라즈비안 서버 구축
+        - 라즈비안 lite 설치 후 서버 구축
+        - mysql 설치 고려
+5. 자동 급여기 : 급양기, 급수기(일정 시간이 되면 주는 것, 양 조절) 
+    - <급양기>
+        
+        모터를 활용한 자동 급양기 구현
+        
+        일정시간(양 조절, 시간 조절)이 되면 통이 돌아가면서 먹이(귀뚜라미) 떨어뜨려 주기 
+        
+    
+    - <급수기 >
+        
+        물의 압력차를 활용한 자동 급수기 구현
+        
+        도마뱀이 물을 마셔서 물의 높이가 낮아지면 자동으로 물 급수
+        
+        [참고자료]
+        
+        [병아리 자작 물통 만들기 / 페트병으로 손쉽게 자동급수기 만들기](https://littlefunny.tistory.com/121)
+        
+
+ 
+
+- 데이터베이스(비교 용도) (보류) → 1, 2, 3, 5가 완료된 후에 고려
+    - 실내 온도, 실외 온도와의 비교
+    - 길이에 따라 성체인지 아닌지 (옵션)
+        - 우선 데이터가 있는지 없는지 확인해야 한다.
+        - 머신 러닝 사용 + 카메라가 길이를 인식할 수 있는지 없는지 고려 필요
+        - 카메라가 찍는 시야 고려
+
+- 역할 담당
+    - 카메라, 비디오 스트리밍, 앱, 서버 : 송연석, 박성범, 박지호
+    - 온도, 습도 센서, 먹이, DB 연결, 설계(엔지니어링) : 조석훈, 김강현, 오정민
+
+- 개코 도마뱀 정보
+    
+    [What Do Geckos Eat?](https://www.thesprucepets.com/what-do-geckos-eat-4684046)
+    
+    [Verge Pets - Automatic Reptile Feeder](https://www.vergepets.com/)
+    
+    [Leopard Gecko Temperature: How Warm Should My Vivarium Be?](https://www.keepingexoticpets.com/leopard-gecko-temperature/)
+    
+
+# 온습도 센서, 먹이, DB 연결, 설계(엔지니어링) 작업
+
+---
+
+### 구매 목록
+
+---
+
+1. 스팟램프 (완)
+
+[아마존 히팅 스팟 램프 50W R63050](https://www.coupang.com/vp/products/4310024609?vendorItemId=3661060584&sourceType=MyCoupang_my_orders_list_product_title&isAddedCart=)
+
+1. Fan 1개 (추후)
+2. 릴레이 모듈(완)
+
+[아두이노 전문 교육쇼핑몰](https://eduino.kr/product/detail.html?product_no=56&gclid=CjwKCAiA1aiMBhAUEiwACw25MawPA5sKgB9VsnOHARUZABhi7UxhM0hrMPiDdhReswWXeXq5QrB49hoC_bMQAvD_BwE)
+
+1. 가습기 모듈(완)
+
+[초음파가습기모듈 방과후교육 실습재료 아두이노 B형 16mm](https://www.coupang.com/vp/products/4711811211?vendorItemId=73243893035&sourceType=MyCoupang_my_orders_list_product_title&isAddedCart=)
+
+1. 전구, 전구소켓(완)
+2. 스텝 모터(완)
+
+[스텝 모터 28BYj-48(드라이버포함) DM741](https://www.coupang.com/vp/products/267014290?itemId=836911592&vendorItemId=4330931740&q=%EC%8A%A4%ED%85%9D%EB%AA%A8%ED%84%B0&itemsCount=36&searchId=e6cabe365be048a3b0116516356448b1&rank=1&isAddedCart=)
+
+ +) 3d 프린팅 된 톱니바퀴 2개(톱니기어 패키지3)
+
+[DIY 톱니기어 패키지(3) R RTS](https://www.coupang.com/vp/products/39822578?itemId=145984392&vendorItemId=4439766779&q=%ED%86%B1%EB%8B%88%EA%B8%B0%EC%96%B4&itemsCount=36&searchId=d5f5856c874d41d2b797ddaf27b0b10e&rank=2&isAddedCart=)
+
+### 급양기, 급수기(일정 시간이 되면 주는 것, 양 조절)
+
+---
+
+- <급양기>
+    
+    모터를 활용한 자동 급양기 구현
+    
+    일정시간(양 조절, 시간 조절)이 되면 통이 돌아가면서 먹이(귀뚜라미) 떨어뜨려 주기 
+    
+    ![DDC8B786-1055-453C-942C-73125A1ABBED.jpeg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/991940c1-0909-4c3c-9aec-5573db4b8667/DDC8B786-1055-453C-942C-73125A1ABBED.jpeg)
+    
+- <급수기>
+    
+    물의 압력차를 활용한 자동 급수기 구현
+    
+    도마뱀이 물을 마셔서 물의 높이가 낮아지면 자동으로 물 급수
+    
+    [참고자료]
+    
+    [병아리 자작 물통 만들기 / 페트병으로 손쉽게 자동급수기 만들기](https://littlefunny.tistory.com/121)
+    
+
+ 
+
+- 급양기 설계
+    
+    ![설계서1.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/89fe6899-3d18-44de-a987-0a1c25fefe18/설계서1.png)
+    
+    ![설계서2.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f6dac9f4-f254-4e06-aed0-dd32ac2006a6/설계서2.png)
+    
+    ![설계서3.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e78b6da0-2756-42c2-a528-bda42ee3b0e4/설계서3.png)
+    
+    ![설계서4.jpg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/613db601-3969-4c5b-860a-3fac8f37d43c/설계서4.jpg)
+    
+
+### <스텝 모터> - 특정 시간이 되면 급양기 회전시켜주기
+
+---
+
+- <Motor.c Mechanism>
+    
+    급양기 회전부의 칸 수가 총 8칸이고 회전부 하판은 45도 각도로 한 칸 크기 정도 구멍이 뚫려있다. 
+    
+    스텝모터와 회전부 고정판을 연결하여 특정시간이 되면 급양기를 45*n도(n= 특정시간이 되었을 때의 count 수, count는 특정시간이 될 때마다 +1해줌)만큼 돌려줌
+    
+
+- <스텝모터 구동원리>
+    
+    ![스텝모터 구동원리.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3865a529-a2c7-4538-afba-9a2fc1c6c8f8/스텝모터_구동원리.png)
+    
+
+<기본 구동원리> - S극 전자석 A,B,C,D에 전류를 흘러주면 자기력이 발생하여 중앙에 있는 N극 전자석이 전류에 따른 자기력을 따라 정렬
+
+예를들어 표의 2번처럼 A와B에 전류를 흘려준다면 두번째 그림의 2번처럼 N극 전자석이 A와B 사이에 위치함
+
+이런식으로 전류를 360도 돌려주면 모터는 360도 회전, 특정각도를 원하면 전류를 바꿔주면 된다.
+
+<setsteps 함수> - S극 전자석의 전류를 흘려줄 수 있도록 세팅
+
+```c
+void setsteps(int n1, int n2, int n3, int n4)
+{
+	pinMode(IN1, OUTPUT);
+	digitalWrite(IN1, n1);
+	pinMode(IN2, OUTPUT);
+	digitalWrite(IN2, n2);
+	pinMode(IN3, OUTPUT);
+	digitalWrite(IN3, n3);
+	pinMode(IN4, OUTPUT);
+	digitalWrite(IN4, n4);
+}
+```
+
+<forward 함수> - 모터를 시계 방향으로 돌려주는 함수
+
+```c
+void forward(int br, int steps)
+{
+	int i;
+	for (i = 0; i <= steps; i++)   //steps수만큼 1step을 돌려준다.
+	{
+		setsteps(1, 1, 0, 0); delay(br);  //delay(br) : 속도를 조절해줌
+		setsteps(0, 1, 0, 0); delay(br);
+		setsteps(0, 1, 1, 0); delay(br);
+		setsteps(0, 0, 1, 0); delay(br);
+		setsteps(0, 0, 1, 1); delay(br);
+		setsteps(0, 0, 0, 1); delay(br);
+		setsteps(1, 0, 0, 1); delay(br);
+		setsteps(1, 0, 0, 0); delay(br);
+	}
+}
+```
+
+<backward 함수> - 모터를 반시계 방향으로 돌려주는 함수
+
+```c
+void backward(int br, int steps)
+{
+	int i;
+	for (i = 0; i <= steps; i++)
+	{
+		setsteps(1, 0, 0, 0); delay(br);
+		setsteps(1, 0, 0, 1); delay(br);
+		setsteps(0, 0, 0, 1); delay(br);
+		setsteps(0, 0, 1, 1); delay(br);
+		setsteps(0, 0, 1, 0); delay(br);
+		setsteps(0, 1, 1, 0); delay(br);
+		setsteps(0, 1, 0, 0); delay(br);
+		setsteps(1, 1, 0, 0); delay(br);
+	}
+}
+```
+
+<main 함수> - 특정시간이 되면 급양기를 45*n도(n= 특정시간이 되었을 때의 count 수, count는 특정시간이 될 때마다 +1해줌)만큼 돌려줌
+
+```c
+int main()
+{
+	wiringPiSetup();
+	time_t current;
+	struct  tm* t;
+	
+	current = time(NULL);
+	t = localtime(&current);
+
+	//시간이 00:00:00이면 while loop 돌려줌
+	while (1)
+	{
+		if (t->tm_hour == 0){
+			if (t->tm_min == 0){
+				if (t->tm_sec == 0){
+					count++;
+					if (count == 8) break;	//급양기의 칸이 7칸만 사용가능->7번만 돌아야함
+					for (int i = count; i < count + 1; i++){
+						forward(speed, STEP * i); delay(2000);
+						backward(speed, STEP * i); delay(2000);
+					}
+				}
+			}
+		}
+  }
+	return 0;
+}
+```
+
+### <온습도 센서 DHT11 / DHT.c Test> - DHT센서 2개를 양쪽 끝에 배치하여 각각의 온도, 습도 값을 받아오고 평균값을 구해 저장 → 스팟램프와 연결하여 전원 on,off
+
+---
+
+- <문제> - DHT센서의 값을 끊임없이 받아와야 하는데 최대 50회(1분 가량) 받아오면 어떤 이유인지 프로그램이 멈추며 더이상 받아지지 않음
+- <1차 문제 해결>  - DHT-브레드보드, DHT-전선 사이의 틈이 생겨 신호를 적절히 못 받아온다고 판단
+1. DHT-전선을 납땜 하여 틈 없이 밀착 시켜줌
+2. 여전히 1분 이내로 프로그램이 멈추며 값을 받아오지 않음
+- <2차 문제 해결> - 타이밍 문제(프로그램은 최초 High에서 Low가 오길 기다리는데, 센서는 Low를 넘어 다음 High에 가 있어서 만날 수 없음)
+1. 무한Loop코드를 수정
+    
+    1) GetRespons, ReadData 함수에서 High와 Low인 상태의 대기 시간이 일정 시간 이상 길어질 경우
+    
+    2) 음수의 값을 받고 
+    
+    3) Run함수에서 해당 While(for)문 에서Continue
+    
+- <스팟램프와 연결> - average 함수에서 **(avrData[2]+(avrData[3]/10)** 즉 평균 온도가 TEMP(25)보다 작으면 스팟램프를 키고 커지면 끔
+
+<GetRespons 함수>
+
+```c
+int GetRespons()
+{
+	int tm1 = micros();
+	pinMode(p1, INPUT);
+	while(digitalRead(p1)== HIGH)
+	**{
+		if(micros() - tm1 > 1000000) return -1;
+	}**
+	int st = micros();
+	tm1 = micros();
+	while(digitalRead(p1)== LOW)
+	**{
+		if(micros() - tm1 > 1000000) return -2;
+	}**
+	int en = micros();
+	tm1 = micros();
+	while(digitalRead(p1)== HIGH)
+	**{
+		if(micros() - tm1 > 1000000) return -3;
+	}**
+	if(en - st < 20) return -1;
+	return 0;
+}
+```
+
+<ReadData 함수>
+
+```c
+int ReadData()
+{
+	int st ,en;
+	for (int i = 0; i < MAX_BIT; i++) Data[i] = 0;
+	for (int i = 0; i < MAX_BIT; i++)
+	{
+		int tm1 = micros();
+		while(digitalRead(p1)== LOW)
+		**{
+			if(micros() - tm1 > 1000000) return -4;
+		}**
+		st = micros();
+		tm1 = micros();
+		while(digitalRead(p1)== HIGH)
+		**{
+			if(micros() - tm1 > 1000000) return -5;
+		}**
+		en = micros();
+		Data[i/8] <<= 1;
+		if(en - st > THRASHOLD)Data[i/8] |=1;
+	}
+	if (Data[0] + Data[1] + Data[2] + Data[3] == Data[4])return 1;
+	return 0;
+}
+```
+
+<Run함수>
+
+```c
+void Run()
+{
+	for(int i=0; i<1;i++)
+	{
+		StartSignal();
+		**int r = GetRespons();**
+		printf("<%d>",co);
+		co++;
+		**if(r < 0) 
+		{
+			printf("%d",r);
+			continue;
+		}**
+
+		**int ret = ReadData();**
+		tret=ret;
+		**if(ret < 0)
+		{
+			printf("%d", ret);
+			continue;
+		}**
+		printf("습도 :  %d.%d%% 온도 : %d.%d℃ Checksum : %d", Data[0], Data[1], Data[2], Data[3], Data[4]);
+		if (ret == 1)
+		{
+			printf("...OK\n");
+		}
+		else 
+		{
+			printf("...ERROR!\n");
+		}
+				
+		delay(1000);
+	}
+	
+}
+```
+
+void average()
+{
+avrData[0]=((double)Data[0]+(double)Data2[0])/2;
+avrData[1]=((double)Data[1]+(double)Data2[1])/2;
+avrData[2]=((double)Data[2]+(double)Data2[2])/2;
+avrData[3]=((double)Data[3]+(double)Data2[3])/2;
+printf("<평균>  습도 :  %.1f%% 온도 : %.1f℃", avrData[0]+(avrData[1]/10), avrData[2]+(avrData[3]/10));
+if (tret==2)
+{
+printf("...OK\n");
+if(avrData[2]+(avrData[3]/10) < TEMP)
+{
+digitalWrite(pin_L,1);
+}
+else
+{
+digitalWrite(pin_L,0);
+}
+}
+else
+{
+printf("...ERROR!\n");
+}
+}
+
+<average 함수>
+
+```c
+void average()
+{
+	avrData[0]=((double)Data[0]+(double)Data2[0])/2;
+	avrData[1]=((double)Data[1]+(double)Data2[1])/2;
+	avrData[2]=((double)Data[2]+(double)Data2[2])/2;
+	avrData[3]=((double)Data[3]+(double)Data2[3])/2;
+	printf("<평균>  습도 :  %.1f%% 온도 : %.1f℃", avrData[0]+(avrData[1]/10), avrData[2]+(avrData[3]/10));
+	**if (tret==2)
+	{
+		printf("...OK\n");
+		if(avrData[2]+(avrData[3]/10) < TEMP)  //TEMP = 25
+		{
+			digitalWrite(pin_L,1);
+		}
+		else
+		{
+			digitalWrite(pin_L,0);
+		}
+	}**
+	else 
+	{
+		printf("...ERROR!\n");
+	}
+}
+```
+
+- <결론>
+    
+    두 개의 센서 설치 후 3가지의 data(센서 1, 센서 2, 평균값)를 1시간 가량 돌렸을 때 이상 없이 돌아감
+    
+    GetResponse()보다 ReadData()에서 문제 발생 잦음
+    
+    - [x]  퇴근 시 라즈베리파이 돌려놓고 가서 익일 데이터와 값 확인 예정 → 이상없이 작동
+
+# 카메라, 스트리밍, 앱 서버 작업
+
+---
+
+- 2021.11.10 현황
+    - flask 간단한 서버 구축 완료
+        - 기능별로 도메인 주소 나눠서, 모바일앱의 기능과 기능별 도메인 주소로 연동 시켜서 라즈베리파이와 연동 가능한 것으로 보임
+    - flask to GPIO 가능 여부 확인
+    - 내일 flask + TCP/IP 소켓 프로그래밍 작업 들어가서 라즈베리파이와 통신이 가능한지 확인하기 (이것만 하면 완료)
+    - 작업한 것들
+        - flask 서버 + GPIO (html과 연동하는 것은 잘 되지 않는다.)
+            
+            [https://gist.github.com/SongYeonSeok/b23a6a6b648c1635344573975bd68ef5](https://gist.github.com/SongYeonSeok/b23a6a6b648c1635344573975bd68ef5)
+            
+        - 서버 관리 웹 프론트엔드
+            
+            [https://gist.github.com/SongYeonSeok/da77bb6cf28d0b164d843091f7a74c18](https://gist.github.com/SongYeonSeok/da77bb6cf28d0b164d843091f7a74c18)
+            
+        - flask + socketIO
+            
+            
+- 2021.11.11 현황
+    - C# 윈폼 기능으로 라즈베리파이 통신하는 방법으로 결정
+    - C# mychat + mylib를 활용하여 LED 제어
+    
+- 카메라 → 스트리밍
+    - 참고 자료
+        
+        [라즈베리파이 motion 사용하기](https://1d1cblog.tistory.com/18)
+        
+        [[개인프로젝트] 라즈베리파이를 이용한 스마트홈 및 원격관리 어플리케이션](https://1d1cblog.tistory.com/45)
+        
+        [라즈베리파이 카메라로 동영상 스트리밍 하기(mjpg-streamer)](https://jow1025.tistory.com/295)
+        
+- 라즈비안 OS 서버 구축
+    - 참고할 만한 사항
+        - 리눅스(Cent OS, 데비안, 라즈비안) 서버 구축법과 구글 드라이브 서버 구축법과 C# [ASP.NET](http://ASP.NET)에 대해서 공부하기
+            - 네이버 클라우드 플랫폼으로 웹 서버 구축하는 방법
+                
+                [네이버 클라우드 플랫폼으로 웹서버 구축하기](https://velog.io/@choidy180/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%ED%94%8C%EB%9E%AB%ED%8F%BC%EC%9C%BC%EB%A1%9C-%EC%9B%B9%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0)
+                
+            - 라즈베리파이로 집에서 서버 구축하는 방법
+                
+                [라즈베리파이로 집에서 서버 구축하기 2. 라즈비안 설치](https://seolin.tistory.com/100)
+                
+            - 데비안으로 서버 구축하는 방법
+                
+                [[11]홈서버 mariadb 설치하기](https://oksoo.tistory.com/17)
+                
+            - C# [ASP.NET](http://ASP.NET)
+                
+                [C# 웹 프로그래밍 - C# 프로그래밍 배우기 (Learn C# Programming)](http://www.csharpstudy.com/web/article/1)
+                
+            - Cent OS 서버 구축법
+                
+                [cent os 서버 구축 - Google Search](https://www.google.com/search?q=cent+os+%EC%84%9C%EB%B2%84+%EA%B5%AC%EC%B6%95&oq=cent+os+%EC%84%9C%EB%B2%84+%EA%B5%AC%EC%B6%95&aqs=edge..69i64j0i13j0i8i13i30l7.6428j0j1&sourceid=chrome&ie=UTF-8)
+                
+        - 라즈비안 OS 서버 구축 방법
+            
+            [라즈베리파이4 설치하기(Raspbian Lite)](https://blog.dalso.org/raspberry-pi/raspberry-pi-4/7874)
+            
+            [[Raspberry Pi 라즈베리파이] 고정 ip 설정하기](https://khstu-98.tistory.com/38)
+            
+        - 라즈비안으로 웹 서버 컴퓨터 준비법
+            
+            [001. 웹서버 컴퓨터 준비 (선택: 라즈베리파이+라즈비안)](https://bloghelloworld.tistory.com/151)
+            
+        - 라즈베리파이로 집에서 서버 구축하는 방법
+            
+            [라즈베리파이로 집에서 서버 구축하기 3. nginx 설치. 포트포워딩](https://seolin.tistory.com/101?category=762766)
+            
+        - 참고
+            
+            [[라즈베리파이, Python] 라즈베리 파이를 이용한 충치 예방 장치](https://developeryuseon.tistory.com/13)
+            
+- 웹 서버 : Flask
+    - 참고 자료
+        - Flask 세팅 + 웹 서버 구축
+            
+            [Python #5 (Flask 세팅 & 웹 서버 구축)](https://hola-que-tal.tistory.com/58)
+            
+        - Flask 가상 환경으로 Flask 구동하기
+            
+            [파이썬 - Flask[1] 가상환경으로 Flask 구동하기](https://bebutae.tistory.com/124)
+            
+        - Flask 소개
+            
+            [[Python] 1. Flask(플라스크) 시작하기](https://hiio.tistory.com/26)
+            
+        - Flask 공식 문서
+            
+            [Welcome to Flask - Flask Documentation (2.0.x)](https://flask.palletsprojects.com/en/2.0.x/)
+            
+            [설치하기 - Flask 0.11-dev documentation](https://flask-docs-kr.readthedocs.io/ko/latest/installation.html)
+            
+        - Do it! 플라스크
+            
+            [점프 투 파이썬](https://wikidocs.net/81085)
+            
+        - 라즈베리파이 + Flask + 포트포워딩 방법
+            
+            [[Raspberrypi] 라즈베리파이 포트포워딩 플라스크 외부접속](https://m.blog.naver.com/dsz08082/221871200736)
+            
+            [라즈베리파이에 Nginx + uWSGI + Flask 설치하기.](https://comdoc.tistory.com/entry/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4%EC%97%90-Nginx-uWSGI-Flask-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)
+            
+            [라즈베리파이에 Flask 웹서버 설치하고 안드로이드(코틀린)에서 Retrofit2로 리퀘스트 하여 Json 데이터 받기](https://m.blog.naver.com/cosmosjs/222010770775)
+            
+            [라즈베리파이 with flask](https://doljokilab.tistory.com/24)
+            
+        - 비전공자의 Flask - 첫 앱 만들어 보기
+            
+            [[비전공자의 Flask-1] 첫 앱 만들어보기](https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html)
+            
+        - 플라스크 웹 서버로 라즈베리파이 GPIO 제어하기
+            
+            [플라스크 웹서버로 라즈베리파이 gpio제어하기](https://m.blog.naver.com/emperonics/221859037718)
+            
+            [[Raspberry Pi] 8. Flask 제어와 웹으로 라즈베리파이 제어](https://andjjip.tistory.com/109)
+            
+        - 라즈베리파이로 충치 예방 장치 구현한 블로그
+            
+            [[라즈베리파이, Python] 라즈베리 파이를 이용한 충치 예방 장치](https://developeryuseon.tistory.com/13)
+            
+            [GitHub - yuseon-Lim/tooth-brushing-monitoring-system: IOT System Using Raspberry Pi 4](https://github.com/yuseon-Lim/tooth-brushing-monitoring-system)
+            
+        - 라즈베리파이 파이썬 사용하는 방법
+            
+            [[흥프로] 6일차 라즈베리파이 라즈비안 파이썬(Python) 사용하기](https://devicemart.blogspot.com/2019/04/6-python.html)
+            
+        - 라즈베리파이 wiringPi + GPIO 유틸리티 사용법
+            
+            [라즈베리파이 wiringPi + gpio 유틸리티 사용법](https://hoho325.tistory.com/218)
+            
+        - 파이썬 소켓 프로그래밍
+            
+            [[Python] Socket과 TCPServer를 이용한 TCP/IP 프로그래밍 (작성중)](https://brownbears.tistory.com/207)
+            
+    - 추가 : 라즈베리파이 cpi (아파치)
+    
+- 앱 : 안드로이드 또는 iOS
+    - 주요 사용할 기술 : MIT App Inventor, 안드로이드 스튜디오(with Java)
+        - MIT App Inventor : iOS, 안드로이드 가능 (테스트 + 보험용)
+            
+            [](https://www.notion.so/806f1f0318ee4184a7355a111c496b4d#4076eac9d4fa4a6593f813a74df6cc53)
+            
+            [【 앱인벤터기초 #08】 앱인벤터 1도 모르고 따라 하기 영상 실습#6 (사진 저장소 이미지 직접 불러오기)](https://rasino.tistory.com/305?category=1068055)
+            
+            - 앱 인벤터 + mjpg 사용 관련 링크
+            
+            [[제어용통신] 앱인벤터,Nucleo보드,라즈베리파이, 서보모터를 이용한 CCTV(외부통신)](https://m.blog.naver.com/durian0328/221757910190)
+            
+        - 안드로이드 : 자바 + 안드로이드 스튜디오 사용 (결정)
+            
+            [ODIY 041 라즈베리 파이 기초 아드로이드 연결하기 (사물인터넷)](https://www.seoulworkshop.org/331)
+            
+    - 기타 : Swift, Xamarin, 플러터
+        - iOS : swift(X)
+            - 최근 오픈소스로 변경된 상태
+            - 윈도우, 리눅스 환경에서 작업이 제한적
+        - c# - Xamarin(X)
+            - Windows, iOS, Android 어플리케이션 통합 개발 가능
+            - C# .NET 프레임워크 기반
+            - 자마린 공식 자습서
+                
+                [Xamarin.Forms 자습서 - Xamarin](https://docs.microsoft.com/ko-kr/xamarin/get-started/tutorials/)
+                
+            
+            [Fragments - Xamarin](https://docs.microsoft.com/en-us/xamarin/android/platform/fragments/)
+            
+        - 플러터
+            - 언어 : Go, Dart
+            - 안드로이드, iOS 앱 개발 가능
+            - 안드로이드 스튜디오를 사용해야 함
+            
+            [[Flutter] #1 플러터를 소개합니다](https://brunch.co.kr/@yudong/105)
+            
+    
+    - 앱 디자인
+        - UI
+        - 기능
+            1. 스트리밍
+            2. 온도 및 습도 상태
+            3. 먹이주기
+            4. manual / auto 설정
+        - tcp/ip 소켓 프로그래밍
+        
+
+- 서버
+    - 어느 정도 구축이 되면 → 스트리밍 파일과 서버와 연동 작업 진행
+
+- 고려해야 할 것
+    - 파충류 케이스 구조 확인
+    - 라즈베리파이 1 ~ 2대 필요 예상
+    
+- 개코 도마뱀, 파충류, 거북이, 뱀 등
