@@ -49,7 +49,7 @@ int PORT = 9000;
 char IP[25] = "192.168.2.58";
 
 int Feed_H = 0;
-int Feed_M = 43;
+int Feed_M = 0;
 int count = 0;
 
 int waterLevel = 255;
@@ -70,7 +70,7 @@ void setsteps(int n1, int n2, int n3, int n4)
 	digitalWrite(IN4,n4);
 }
 
-// forward 함수
+// (급양기)forward 함수
 // 정방향(시계방향)으로 회전
 // steps 수만큼 회전 
  void forward (int br,int steps)
@@ -98,7 +98,7 @@ void setsteps(int n1, int n2, int n3, int n4)
 	}
 }
 
-// backward 함수
+// (급양기)backward 함수
 // 역방향(반시계방향)으로 회전
 // steps 수만큼 회전 
 void backward (int br,int steps)
@@ -124,6 +124,8 @@ void backward (int br,int steps)
         delay(br);
 	}
 }
+//급수기 함수
+//1초동안 워터펌프 가동
 void pump()
 {
 	digitalWrite(pr1,LOW);
@@ -131,6 +133,8 @@ void pump()
 	digitalWrite(pr1,HIGH);
 	
 }
+//급양기 함수 
+//특정시간(0시0분)이 되면 급양기를 45*n도(n= 특정시간이 되었을 때의 count 수, count는 특정시간이 될 때마다 +1해줌)만큼 돌려줌
 void Feeding()
 {
 	count++;	//7번만 돌아야하기 때문에 -> 급양기의 칸이 7칸만 사용가능
@@ -149,6 +153,7 @@ void Feeding()
 	}
 }
 
+//급양, 급수 Thread
 void* FeedThr()
 {
 	
@@ -168,12 +173,14 @@ void* FeedThr()
 	}
 }
 
+//수위센서 아날로그 값->디지털 값 -> 백분율 
 int level(int n)
 {
 	waterLevel = n*100/255;
 	return waterLevel;
 }
 
+//수위센서 Thread
 void* WaterLevel()
 {
 	int Level_data;
@@ -201,6 +208,7 @@ void* WaterLevel()
 	}
 }
 
+//서버로부터 값 
 void* ReadBuf()
 {
 	while(1)
@@ -396,6 +404,8 @@ void Run2()
 	}
 }
 
+//Fan Thread
+//2.5초 켜고 15초 끔(1. Thread 돌 동안 main함수가 돌지 않기 때문 2. 적은시간 Fan을 틀어도 습도 감소량 큼) 
 void* Fan()
 {
 	while (1)
@@ -411,6 +421,7 @@ void* Fan()
 	}
 }
 
+//온습도, Fan 제어 및 온습도, Fan, 수위 서버로 전송
 void average()
 {
 	avrData[0]=(Data[0]+Data2[0]);		// 습도 정수부 합
@@ -423,7 +434,8 @@ void average()
 	if (tret==2)
 	{
 		printf("...OK\n");
-		
+		//습도제어
+		//55% 넘으면 가습기 꺼줌, Fan켜줌 안넘으면 가습기 켜줌 Fan 꺼줌
 		if(avrData[0]/2 > setHum)
 		{
 			digitalWrite(pr2,1);
@@ -433,7 +445,8 @@ void average()
 		{
 			digitalWrite(pr2,0);
 		}
-
+		//온도제어
+		//25도 넘으면 조명 꺼줌 안넘으면 조명 켜줌
 		if(avrData[3]/2 > setTemp)
 		{
 			digitalWrite(pr3,1);
@@ -442,7 +455,8 @@ void average()
 		{
 			digitalWrite(pr3,0);
 		}
-		
+		//온도에 따른 Fan제어
+		//26도 넘으면 온도 낮춰주기위해 Fan 켜줌
 		if(avrData[3]/2 > 260)
 		{
 			fanSta = 1;
