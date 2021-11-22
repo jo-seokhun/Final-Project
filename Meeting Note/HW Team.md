@@ -9,13 +9,10 @@
 - <최초 설계> 스텝모터를 활용한 자동 급양기 구현 , 일정 시간이 되면 통이 돌아가면서 먹이(귀뚜라미) 떨어뜨려 주기
 - 급양기 설계
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7195344c-4cdb-4ed1-9c2e-445ed58cd7c6/Untitled.png)
-
 - <문제 발생> 스텝모터와 연결하여 구동 시 마찰과 유격 문제로 의도대로 작동 실패
 - <1차 문제 해결> 3D 프린터로 제작(ThikerCad, Cura, Sindoh 3DWOX)
-    
-    ![급양기.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8c3450ca-5c46-4987-98c5-c0535bf4ae5c/급양기.png)
-    
+
+
      
     
 
@@ -28,8 +25,8 @@
     - 스텝모터와 회전부 고정판을 연결하여 특정시간이 되면 급양기를 45*n도(n= 특정시간이 되었을 때의 count 수, count는 특정시간이 될 때마다 +1해줌)만큼 돌려줌
 - 스텝모터 구동원리
     
-    ![스텝모터 구동원리.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3865a529-a2c7-4538-afba-9a2fc1c6c8f8/스텝모터_구동원리.png)
-    
+    ![스텝모터 구동원리](https://user-images.githubusercontent.com/88314920/142792543-49e970dc-1fdf-4577-9bc4-fcfc5be3650d.jpg)
+
     S극 전자석 A,B,C,D에 전류를 흘러주면 자기력이 발생하여 중앙에 있는 N극 전자석이 전류에 따른 자기력을 따라 정렬
     
     예를들어 표의 2번처럼 A와B에 전류를 흘려준다면 두번째 그림의 2번처럼 N극 전자석이 A와B 사이에 위치함
@@ -170,7 +167,7 @@ int main()
 
 - <최초 설계> 물의 압력 차를 활용한 자동 급수기 구현 / 도마뱀이 물을 마셔서 물의 높이가 낮아지면 지정된 위치(두 번째 구멍)까지 자동으로 물 급수
 
-[병아리 자작 물통 만들기 / 페트병으로 손쉽게 자동급수기 만들기](https://littlefunny.tistory.com/121)
+    [병아리 자작 물통 만들기 / 페트병으로 손쉽게 자동급수기 만들기](https://littlefunny.tistory.com/121)
 
 - <문제 발생> 물의 급수를 해주는 물통과 관의 수압 차 때문에 일정 높이까지 물을 채워주는 형식이 불가능
 - <1차 문제 해결> 워터 펌프를 이용한 물의 급수_일정 시간(1일 1회, 급양기와 일치)이 되면 자동으로 워터펌프를 사용하여 물 급수
@@ -187,7 +184,9 @@ int main()
     3. 원심력에 의해서 회전 바깥쪽 물의 압력이 중심의 물의 압력보다 커짐 
     4. 결과적으로 물의 압력이 작은 곳(중심)에서 압력이 높은 곳(바깥쪽)으로 이동
     
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/53d94d3a-d469-4754-9fbd-272e90fe5796/Untitled.png)
+    ![워터펌프](https://user-images.githubusercontent.com/88314920/142792838-61dc87f6-82a3-4318-9457-71264e1623ac.png)
+
+
     
 
  
@@ -600,7 +599,7 @@ int main(int n ,char *argv[])
 
 - 수위센서 원리
     
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dad4a7f3-8e28-45c5-9b8f-96a4d5b45a63/Untitled.png)
+    ![수위센서](https://user-images.githubusercontent.com/88314920/142793039-efe82e4e-fc40-4658-addd-ad2fa755e5f5.png)
     
     - 세로로 길게 있는 전극 부분이 수위에 따라 저항이 변함
     - 전압이 일정하기 때문에 저항이 변함에 따라 전류도 변함
