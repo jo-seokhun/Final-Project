@@ -67,5 +67,5 @@ IoT 기반의 도마뱀 사육장 프로젝트는 이 의문으로 시작되었�
 + 자동 급여, 급수
 ![image](https://user-images.githubusercontent.com/88314920/145770263-e2db7d24-4202-4617-93bf-5f75f7a60688.png)
 
-+ 수동 급
++ 수동 급여
 ![image](https://user-images.githubusercontent.com/88314920/145770284-14021a5d-ca11-4e7d-9f95-800e3f6adc46.png)
