@@ -42,7 +42,6 @@ Android Java
 Python
 
 5.프로젝트 개요
-<![endif]-->
 
 ‘나는 편한데, 우리집 뚱이는?’
 
