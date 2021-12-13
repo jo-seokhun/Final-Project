@@ -60,13 +60,17 @@ IoT 기반의 도마뱀 사육장 프로젝트는 이 의문으로 시작되었�
 ![image](https://user-images.githubusercontent.com/88314920/145770127-74f88189-7235-45d5-8b14-ea13d459d37e.png)
 
 + 온습도 자동제어
+
 ![image](https://user-images.githubusercontent.com/88314920/145770190-e6c6e12d-3df2-44a9-bf45-cd84c5a2e996.png)
 
 + 온습도 수동제어
+
 ![image](https://user-images.githubusercontent.com/88314920/145770232-49a23ffa-bafa-46cb-af1b-ba4ce846d6cf.png)
 
 + 자동 급여, 급수
+
 ![image](https://user-images.githubusercontent.com/88314920/145770263-e2db7d24-4202-4617-93bf-5f75f7a60688.png)
 
 + 수동 급여
+
 ![image](https://user-images.githubusercontent.com/88314920/145770284-14021a5d-ca11-4e7d-9f95-800e3f6adc46.png)
